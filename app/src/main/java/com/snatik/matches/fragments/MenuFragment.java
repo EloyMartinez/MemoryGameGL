@@ -72,8 +72,6 @@ public class MenuFragment extends Fragment {
 		startLightsAnimation();
 		startTootipAnimation();
 
-		// play background music
-		Music.playBackgroundMusic();
 		return view;
 	}
 

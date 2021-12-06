@@ -9,7 +9,10 @@ public class Music {
 
 	public static boolean OFF = false;
 
-	public static void playCorrent() {
+	/**
+	 * Lance la musique actuelle dans le jeu
+	 */
+	public static void playCurrent() {
 		if (!OFF) {
 			MediaPlayer mp = MediaPlayer.create(Shared.context, R.raw.correct_answer);
 			mp.setOnCompletionListener(new OnCompletionListener() {
@@ -25,10 +28,9 @@ public class Music {
 		}
 	}
 
-	public static void playBackgroundMusic() {
-		// TODO
-	}
-
+	/**
+	 * Lance la musique d'animation pour le débloquage d'une nouvelle étoile
+	 */
 	public static void showStar() {
 		if (!OFF) {
 			MediaPlayer mp = MediaPlayer.create(Shared.context, R.raw.star);

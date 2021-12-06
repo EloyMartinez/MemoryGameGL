@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.util.SparseArray;
 import android.widget.TextView;
 
-public classFontLoader {
+public class FontLoader {
 
 	public static final int GROBOLD = 0;
 
@@ -32,7 +32,7 @@ public classFontLoader {
 			return null;
 		}
 	}
-	
+
 	public static void loadFonts(Context context) {
 		for (int i = 0; i < Font.values().length; i++) {
 			fonts.put(i, Typeface.createFromAsset(context.getAssets(), Font.getByVal(i)));
@@ -42,12 +42,12 @@ public classFontLoader {
 
 	/**
 	 * Returns a loaded custom font based on it's identifier.
-	 * 
+	 *
 	 * @param context
 	 *            - the current context
 	 * @param fontIdentifier
 	 *            = the identifier of the requested font
-	 * 
+	 *
 	 * @return Typeface object of the requested font.
 	 */
 	public static Typeface getTypeface(Context context, Font font) {
@@ -59,7 +59,7 @@ public classFontLoader {
 
 	/**
 	 * Set the given font into the array of text views
-	 * 
+	 *
 	 * @param context
 	 *            - the current context
 	 * @param textViews
@@ -73,7 +73,7 @@ public classFontLoader {
 
 	/**
 	 * Set the given bold font into the array of text views
-	 * 
+	 *
 	 * @param context
 	 *            - the current context
 	 * @param textViews

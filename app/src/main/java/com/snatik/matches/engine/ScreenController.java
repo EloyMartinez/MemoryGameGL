@@ -37,11 +37,18 @@ public class ScreenController {
 		DIFFICULTY,
 		THEME_SELECT
 	}
-	
+	/**
+	 * Permet d'obtenir l'écran précédent de l'application
+	 * @return un écran correspondant au précédent
+	 */
 	public static Screen getLastScreen() {
 		return openedScreens.get(openedScreens.size() - 1);
 	}
 
+	/**
+	 * Permet d'afficher un écran déterminé sur l'application
+	 * @param screen, un écran correspondant à l'écran que l'on souhaite afficher sur l'application
+	 */
 	public void openScreen(Screen screen) {
 		mFragmentManager = Shared.activity.getSupportFragmentManager();
 		
@@ -57,7 +64,9 @@ public class ScreenController {
 		fragmentTransaction.commit();
 		openedScreens.add(screen);
 	}
-
+	/**
+	 * Permet de revenir à l'écran précédent
+	 */
 	public boolean onBack() {
 		if (openedScreens.size() > 0) {
 			Screen screenToRemove = openedScreens.get(openedScreens.size() - 1);
@@ -77,6 +86,11 @@ public class ScreenController {
 		return true;
 	}
 
+	/**
+	 * Permet de retourner un fragment en fonction du type d'écran donné
+	 * @param screen, un écran correspondant à l'écran que l'on veut analyser
+	 * @return un fragment correspondant au fragment associé à un type d'écran
+	 */
 	private Fragment getFragment(Screen screen) {
 		switch (screen) {
 		case MENU:

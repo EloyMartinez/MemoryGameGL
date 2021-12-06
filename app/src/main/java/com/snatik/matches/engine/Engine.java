@@ -230,7 +230,7 @@ public class Engine extends EventObserverAdapter {
 
 					@Override
 					public void run() {
-						Music.playCorrent();
+						Music.playCurrent();
 					}
 				}, 1000);
 				mToFlip -= 2;
