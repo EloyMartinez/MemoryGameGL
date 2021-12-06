@@ -2,11 +2,15 @@
   <library name="Gradle: com.android.support:print:28.0.0@aar">
     <ANNOTATIONS>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/acd60c0c54ca5117dd3c162311857f17/annotations.zip!/" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/3d4661722c19c3f1cd45db98a367bb05/annotations.zip!/" />
     </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/acd60c0c54ca5117dd3c162311857f17/jars/classes.jar!/" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/acd60c0c54ca5117dd3c162311857f17/res" />
       <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/acd60c0c54ca5117dd3c162311857f17/AndroidManifest.xml" />
+      <root url="jar://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/3d4661722c19c3f1cd45db98a367bb05/jars/classes.jar!/" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/3d4661722c19c3f1cd45db98a367bb05/AndroidManifest.xml" />
+      <root url="file://$USER_HOME$/.gradle/caches/transforms-1/files-1.1/print-28.0.0.aar/3d4661722c19c3f1cd45db98a367bb05/res" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />

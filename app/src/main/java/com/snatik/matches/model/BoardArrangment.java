@@ -21,11 +21,10 @@ public class BoardArrangment {
 	public Map<Integer, String> tileUrls;
 
 	/**
-	 * 
-	 * @param id
-	 *            The id is the number between 0 and number of possible tiles of
-	 *            this theme
-	 * @return The Bitmap of the tile
+	 * Permet de retourner un bitmap pour une tuile choisie
+	 * @param id, un entier correspondant à la position de la tuile dans la liste
+	 * @param size, un entier correspondant à la taille du bitmap désirée
+	 * @return un bitmap correspondant à celui de la tuile
 	 */
 	public Bitmap getTileBitmap(int id, int size) {
 		String string = tileUrls.get(id);
@@ -38,6 +37,10 @@ public class BoardArrangment {
 		return null;
 	}
 
+	/**
+	 * Permet de retoruner si deux tuiles sont paires
+	 * @return un booleen représentant si deux tuiles font partie de la même paire
+	 */
 	public boolean isPair(int id1, int id2) {
 		Integer integer = pairs.get(id1);
 		if (integer == null) {
