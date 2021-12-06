@@ -5,7 +5,7 @@ import android.graphics.Typeface;
 import android.util.SparseArray;
 import android.widget.TextView;
 
-public classFontLoader {
+public class FontLoader {
 
 	public static final int GROBOLD = 0;
 
