@@ -89,7 +89,12 @@ public class DifficultySelectFragment extends Fragment {
         return view;
 
     }
-
+    /**
+     * Permet d'obtenir le meilleur temps pour un niveau
+     * @param difficulty, un entier représentant la difficulté du niveau
+     * @param theme, un entier représentant le thème du niveau
+     * @return un string représenant le meilleur temps pour un niveau
+     */
     private String getBestTimeForStage(int theme, int difficulty) {
         int bestTime = Memory.getBestTime(theme, difficulty);
         if (bestTime != -1) {
@@ -102,7 +107,10 @@ public class DifficultySelectFragment extends Fragment {
             return result;
         }
     }
-
+    /**
+     * Permet d'animer une vue
+     * @param view, une vue contenant différents objets que l'on souhaite animer
+     */
     private void animate(View... view) {
         AnimatorSet animatorSet = new AnimatorSet();
         Builder builder = animatorSet.play(new AnimatorSet());
@@ -115,7 +123,11 @@ public class DifficultySelectFragment extends Fragment {
         animatorSet.setInterpolator(new BounceInterpolator());
         animatorSet.start();
     }
-
+    /**
+     * Permet de définir une difficulté lorsque l'on clique dessus
+     * @param view, la vue sur laquelle l'utilisateur va cliquer
+     * @param difficulty, un entier représentant la difficulté selectionnée
+     */
     private void setOnClick(View view, final int difficulty) {
         view.setOnClickListener(new View.OnClickListener() {
             @Override

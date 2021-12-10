@@ -41,21 +41,31 @@ public class TileView extends FrameLayout {
 		mTopImage = (RelativeLayout) findViewById(R.id.image_top);
 		mTileImage = (ImageView) findViewById(R.id.image);
 	}
-
+	/**
+	 * Permet d'initialiser l'image d'une tuile
+	 * @param bitmap, un bitmap correspondant à celui que l'on veut donner à la tuile
+	 */
 	public void setTileImage(Bitmap bitmap) {
 		mTileImage.setImageBitmap(bitmap);
 	}
 
+	/**
+	 * Permet de retourner face visible une tuile
+	 */
 	public void flipUp() {
 		mFlippedDown = false;
 		flip();
 	}
-
+	/**
+	 * Permet de retourner face cachée une tuile
+	 */
 	public void flipDown() {
 		mFlippedDown = true;
 		flip();
 	}
-	
+	/**
+	 * Permet de retourner une tuile de jeu
+	 */
 	private void flip() {
 		FlipAnimation flipAnimation = new FlipAnimation(mTopImage, mTileImage);
 		if (mTopImage.getVisibility() == View.GONE) {
@@ -63,7 +73,10 @@ public class TileView extends FrameLayout {
 		}
 		startAnimation(flipAnimation);
 	}
-
+	/**
+	 * Permet de savoir si une tuile est retournée face cachée
+	 * @return  un booleen représentant si la tuile est face cachée ou non
+	 */
 	public boolean isFlippedDown() {
 		return mFlippedDown;
 	}
@@ -96,6 +109,9 @@ public class TileView extends FrameLayout {
 			setInterpolator(new AccelerateDecelerateInterpolator());
 		}
 
+		/**
+		 * Permet de gérer l'affichage de l'animation du retorunement d'une tuile
+		 */
 		public void reverse() {
 			forward = false;
 			View switchView = toView;

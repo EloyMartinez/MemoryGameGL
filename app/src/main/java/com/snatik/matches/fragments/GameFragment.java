@@ -58,7 +58,9 @@ public class GameFragment extends BaseFragment {
 		Shared.eventBus.unlisten(GameWonEvent.TYPE, this);
 		super.onDestroy();
 	}
-
+	/**
+	 * Permet d'initialiser la grille de tuiles du jeu
+	 */
 	private void buildBoard() {
 		Game game = Shared.engine.getActiveGame();
 		int time = game.boardConfiguration.time;
@@ -67,13 +69,18 @@ public class GameFragment extends BaseFragment {
 		
 		startClock(time);
 	}
-	
+	/**
+	 * Permet de définir le temps d'une partie
+	 */
 	private void setTime(int time) {
 		int min = time / 60;
 		int sec = time - min*60;
 		mTime.setText(" " + String.format("%02d", min) + ":" + String.format("%02d", sec));
 	}
-
+	/**
+	 * Permet de démarrer un timer
+	 * @param sec, un entier représentant le nombre de secondes pour lequel on fixe le timer
+	 */
 	private void startClock(int sec) {
 		Clock clock = Clock.getInstance();
 		clock.startTimer(sec*1000, 1000, new OnTimerCount() {

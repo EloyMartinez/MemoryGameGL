@@ -67,6 +67,10 @@ public class PopupWonView extends RelativeLayout {
 		});
 	}
 
+	/**
+	 * Permet de mettre à jour l'affichage des informations sur la partie actuelle (score, temps, ...)
+	 * @param  gameState, état du jeu représentant l'avancement actuel de la partie
+	 */
 	public void setGameState(final GameState gameState) {
 		int min = gameState.remainedSeconds / 60;
 		int sec = gameState.remainedSeconds - min * 60;
@@ -83,6 +87,10 @@ public class PopupWonView extends RelativeLayout {
 		}, 500);
 	}
 
+	/**
+	 * Permet de représenter l'affichage du score obtenu, ceci en affichant de 0 à 3 étoiles
+	 * @param  start, un entier représentant le nombre d'étoiles obtenu lors de la partie
+	 */
 	private void animateStars(int start) {
 		switch (start) {
 		case 0:
@@ -120,7 +128,12 @@ public class PopupWonView extends RelativeLayout {
 			break;
 		}
 	}
-	
+
+	/**
+	 * Permet d'animer une étoile représentative du score du joueur
+	 * @param view, une vue représentative de l'étoile à animer
+	 * @param delay, un entier correspondant au délai à attendre avant de lancer l'animation d'affichage
+	 */
 	private void animateStar(final View view, int delay) {
 		ObjectAnimator alpha = ObjectAnimator.ofFloat(view, "alpha", 0, 1f);
 		alpha.setDuration(100);
@@ -143,6 +156,11 @@ public class PopupWonView extends RelativeLayout {
 		}, delay);
 	}
 
+	/**
+	 * Permet de gérer l'animation du score et du temps restant d'une partie
+	 * @param achievedScore, un entier correspondant au score actuel du joueur
+	 * @param remainedSeconds, un entier correspondant au temps restant au joueur pour associer les paires
+	 */
 	private void animateScoreAndTime(final int remainedSeconds, final int achievedScore) {
 		final int totalAnimation = 1200;
 

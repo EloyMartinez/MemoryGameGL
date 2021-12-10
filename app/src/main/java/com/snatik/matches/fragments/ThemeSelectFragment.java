@@ -56,16 +56,16 @@ public class ThemeSelectFragment extends Fragment {
 			}
 		});
 
-		/**
-		 * Imporove performance first!!!
-		 */
 		animateShow(animals);
 		animateShow(monsters);
 		animateShow(emoji);
 
 		return view;
 	}
-
+	/**
+	 * Permet d'animer une vue
+	 * @param view, une vue correspondant à celle que l'on souhaite animer
+	 */
 	private void animateShow(View view) {
 		ObjectAnimator animatorScaleX = ObjectAnimator.ofFloat(view, "scaleX", 0.5f, 1f);
 		ObjectAnimator animatorScaleY = ObjectAnimator.ofFloat(view, "scaleY", 0.5f, 1f);
@@ -76,7 +76,12 @@ public class ThemeSelectFragment extends Fragment {
 		view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animatorSet.start();
 	}
-
+	/**
+	 * Permet de définir le nombre d'etoiles
+	 * @param theme, le thème actuel
+	 * @param imageView, une imageview représentant l'image pour laquelle on souhaite définir le nombre d'etoiles
+	 * @param type, un string représentant le format que l'on souhaite utiliser
+	 */
 	private void setStars(ImageView imageView, Theme theme, String type) {
 		int sum = 0;
 		for (int difficulty = 1; difficulty <= 6; difficulty++) {

@@ -32,7 +32,10 @@ public class FontLoader {
 			return null;
 		}
 	}
-
+	/**
+	 * Permet de charger les polices
+	 * @param context, représentant le contexte actuel
+	 */
 	public static void loadFonts(Context context) {
 		for (int i = 0; i < Font.values().length; i++) {
 			fonts.put(i, Typeface.createFromAsset(context.getAssets(), Font.getByVal(i)));
@@ -84,7 +87,14 @@ public class FontLoader {
 	public static void setBoldTypeface(Context context, TextView[] textViews, Font font) {
 		setTypeFaceToTextViews(context, textViews, font, Typeface.BOLD);
 	}
-
+	/**
+	 * Permet d'initialiser les polices aux textviews de l'application
+	 * @param context, le contexte actuel
+	 * @param font, la police à utiliser
+	 * @param fontStyle, un entier représentant le style de police à appliquer
+	 * @param textViews, un tableau de textviews représentant l'ensemble
+	 *                     des textviews auquels on souhaite définir la police
+	 */
 	private static void setTypeFaceToTextViews(Context context, TextView[] textViews, Font font, int fontStyle) {
 		if (!fontsLoaded) {
 			loadFonts(context);

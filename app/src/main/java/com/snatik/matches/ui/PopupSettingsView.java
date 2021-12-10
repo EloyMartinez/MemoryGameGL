@@ -57,6 +57,9 @@ public class PopupSettingsView extends LinearLayout {
 		setMusicButton();
 	}
 
+	/**
+	 * Permet de changer l'état du bouton lié à la musique
+	 */
 	private void setMusicButton() {
 		if (Music.OFF) {
 			mSoundText.setText("Sound OFF");

@@ -10,7 +10,7 @@ import android.os.SystemClock;
 public abstract class CountDownClock {
 
 	/**
-	 * Millis since boot when alarm should stop.
+	 * Millisecondes since boot when alarm should stop.
 	 */
 	private long mStopTimeInFuture;
 
