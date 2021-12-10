@@ -22,15 +22,16 @@ import com.snatik.matches.utils.Clock.OnTimerCount;
 import com.snatik.matches.utils.FontLoader;
 import com.snatik.matches.utils.FontLoader.Font;
 
-public class GameFragment extends BaseFragment {
+public class GameFragment extends BaseFragment {//Classe dédiée à l'activité de jeu
 
-	private BoardView mBoardView;
-	private TextView mTime;
-	private ImageView mTimeImage;
-	private LinearLayout ads;
+	private BoardView mBoardView;//Vue de la grille
+	private TextView mTime;//temps de jeu
+	private ImageView mTimeImage;//image du temps
+	private LinearLayout ads;//publicité (non implémenté)
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		//réglage de la vue
 		ViewGroup view = (ViewGroup) inflater.inflate(R.layout.game_fragment, container, false);
 		view.setClipChildren(false);
 		((ViewGroup)view.findViewById(R.id.game_board)).setClipChildren(false);
@@ -44,6 +45,7 @@ public class GameFragment extends BaseFragment {
 
 		// build board
 		buildBoard();
+		//listener d'évènements
 		Shared.eventBus.listen(FlipDownCardsEvent.TYPE, this);
 		Shared.eventBus.listen(HidePairCardsEvent.TYPE, this);
 		Shared.eventBus.listen(GameWonEvent.TYPE, this);
@@ -53,6 +55,7 @@ public class GameFragment extends BaseFragment {
 	
 	@Override
 	public void onDestroy() {
+		//listener d'évènements
 		Shared.eventBus.unlisten(FlipDownCardsEvent.TYPE, this);
 		Shared.eventBus.unlisten(HidePairCardsEvent.TYPE, this);
 		Shared.eventBus.unlisten(GameWonEvent.TYPE, this);
@@ -113,5 +116,4 @@ public class GameFragment extends BaseFragment {
 	public void onEvent(HidePairCardsEvent event) {
 		mBoardView.hideCards(event.id1, event.id2);
 	}
-
 }

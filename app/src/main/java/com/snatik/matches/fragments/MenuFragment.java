@@ -23,8 +23,9 @@ import com.snatik.matches.events.ui.StartEvent;
 import com.snatik.matches.ui.PopupManager;
 import com.snatik.matches.utils.Utils;
 
-public class MenuFragment extends Fragment {
+public class MenuFragment extends Fragment {//Classe dédiée à la gestion du menu
 
+	//images du menu
 	private ImageView mTitle;
 	private ImageView mStartGameButton;
 	private ImageView mStartButtonLights;
@@ -34,6 +35,7 @@ public class MenuFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		//réglages de la vue
 		View view = inflater.inflate(R.layout.menu_fragment, container, false);
 		mTitle = (ImageView) view.findViewById(R.id.title);
 		mStartGameButton = (ImageView) view.findViewById(R.id.start_game_button);

@@ -14,7 +14,7 @@ import com.snatik.matches.events.ui.ThemeSelectedEvent;
 import com.snatik.matches.events.ui.DifficultySelectedEvent;
 import com.snatik.matches.events.ui.StartEvent;
 
-public class BaseFragment extends Fragment implements EventObserver {
+public class BaseFragment extends Fragment implements EventObserver {//Classe dédiée à la gestion des fragments de base
 
 	@Override
 	public void onEvent(FlipCardEvent event) {
