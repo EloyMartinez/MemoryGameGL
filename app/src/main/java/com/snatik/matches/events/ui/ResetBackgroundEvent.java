@@ -6,7 +6,7 @@ import com.snatik.matches.events.EventObserver;
 /**
  * When the 'back to menu' was pressed.
  */
-public class ResetBackgroundEvent extends AbstractEvent {
+public class ResetBackgroundEvent extends AbstractEvent {//Classe dédiée à l'évènement de réinitialisation d'image de fond
 
 	public static final String TYPE = ResetBackgroundEvent.class.getName();
 

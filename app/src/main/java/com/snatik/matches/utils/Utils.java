@@ -8,7 +8,7 @@ import android.media.ThumbnailUtils;
 
 import com.snatik.matches.common.Shared;
 
-public class Utils {
+public class Utils {//Classe dédiée à la gestion de l'appareil
 
 	/**
 	 * Permet d'obtenir le nombre de pixels
