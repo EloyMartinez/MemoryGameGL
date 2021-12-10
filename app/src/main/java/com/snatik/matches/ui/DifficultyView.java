@@ -11,9 +11,9 @@ import android.widget.LinearLayout;
 import com.snatik.matches.R;
 import com.snatik.matches.common.Shared;
 
-public class DifficultyView extends LinearLayout {
+public class DifficultyView extends LinearLayout {//Classe dédiée à la vue de la difficulté
 
-	private ImageView mTitle;
+	private ImageView mTitle;//vue de la difficulté
 	
 	public DifficultyView(Context context) {
 		this(context, null);
@@ -21,6 +21,7 @@ public class DifficultyView extends LinearLayout {
 	
 	public DifficultyView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		//Fixation de la vue
 		LayoutInflater.from(context).inflate(R.layout.difficult_view, this, true);
 		setOrientation(LinearLayout.VERTICAL);
 		mTitle = (ImageView) findViewById(R.id.title);
@@ -36,5 +37,4 @@ public class DifficultyView extends LinearLayout {
 		int drawableResourceId = Shared.context.getResources().getIdentifier(titleResource, "drawable", Shared.context.getPackageName());
 		mTitle.setImageResource(drawableResourceId);
 	}
-	
 }

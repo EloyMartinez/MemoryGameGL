@@ -16,7 +16,7 @@ import com.snatik.matches.R;
 import com.snatik.matches.common.Shared;
 import com.snatik.matches.model.GameState;
 
-public class PopupManager {
+public class PopupManager {//Classe dédée à la gestion des popups
 
 	/**
 	 * Permet d'afficher le pop up lié aux réglages de la partie

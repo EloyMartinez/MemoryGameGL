@@ -16,10 +16,10 @@ import com.snatik.matches.common.Shared;
 import com.snatik.matches.utils.FontLoader;
 import com.snatik.matches.utils.FontLoader.Font;
 
-public class PopupSettingsView extends LinearLayout {
+public class PopupSettingsView extends LinearLayout {//Classe dédiée à la vue de la popup des paramètres
 
-	private ImageView mSoundImage;
-	private TextView mSoundText;
+	private ImageView mSoundImage;//vue de l'image de son
+	private TextView mSoundText;//textview du son
 
 	public PopupSettingsView(Context context) {
 		this(context, null);
@@ -27,6 +27,7 @@ public class PopupSettingsView extends LinearLayout {
 
 	public PopupSettingsView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		//réglages de la vue
 		setOrientation(LinearLayout.VERTICAL);
 		setBackgroundResource(R.drawable.settings_popup);
 		LayoutInflater.from(getContext()).inflate(R.layout.popup_settings_view, this, true);
@@ -42,7 +43,7 @@ public class PopupSettingsView extends LinearLayout {
 				setMusicButton();
 			}
 		});
-		View rate = findViewById(R.id.rate);
+		View rate = findViewById(R.id.rate);//Notation de l'application
 		rate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -61,6 +62,7 @@ public class PopupSettingsView extends LinearLayout {
 	 * Permet de changer l'état du bouton lié à la musique
 	 */
 	private void setMusicButton() {
+		//Inversion de l'état du controleur de la musique
 		if (Music.OFF) {
 			mSoundText.setText("Sound OFF");
 			mSoundImage.setImageResource(R.drawable.button_music_off);

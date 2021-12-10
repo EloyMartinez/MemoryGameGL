@@ -23,16 +23,16 @@ import com.snatik.matches.utils.Clock.OnTimerCount;
 import com.snatik.matches.utils.FontLoader;
 import com.snatik.matches.utils.FontLoader.Font;
 
-public class PopupWonView extends RelativeLayout {
+public class PopupWonView extends RelativeLayout {//Classe dédiée à la gestion de la popup de victoire
 
-	private TextView mTime;
-	private TextView mScore;
-	private ImageView mStar1;
-	private ImageView mStar2;
-	private ImageView mStar3;
-	private ImageView mNextButton;
-	private ImageView mBackButton;
-	private Handler mHandler;
+	private TextView mTime;//temps
+	private TextView mScore;//score
+	private ImageView mStar1;//première étoile (difficulté facile)
+	private ImageView mStar2;//première étoile (difficulté moyenne)
+	private ImageView mStar3;//première étoile (difficulté difficile)
+	private ImageView mNextButton;//bouton de nouvelle partie
+	private ImageView mBackButton;//bouton de retour au jeu
+	private Handler mHandler;//handler de l'activité
 
 	public PopupWonView(Context context) {
 		this(context, null);
@@ -40,6 +40,7 @@ public class PopupWonView extends RelativeLayout {
 
 	public PopupWonView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		//Réglage de la vue de la popup
 		LayoutInflater.from(context).inflate(R.layout.popup_won_view, this, true);
 		mTime = (TextView) findViewById(R.id.time_bar_text);
 		mScore = (TextView) findViewById(R.id.score_bar_text);
@@ -48,7 +49,7 @@ public class PopupWonView extends RelativeLayout {
 		mStar3 = (ImageView) findViewById(R.id.star_3);
 		mBackButton = (ImageView) findViewById(R.id.button_back);
 		mNextButton = (ImageView) findViewById(R.id.button_next);
-		FontLoader.setTypeface(context, new TextView[] { mTime, mScore }, Font.GROBOLD);
+		FontLoader.setTypeface(context, new TextView[] { mTime, mScore }, Font.GROBOLD);//Police
 		setBackgroundResource(R.drawable.level_complete);
 		mHandler = new Handler();
 		
@@ -80,7 +81,7 @@ public class PopupWonView extends RelativeLayout {
 		mHandler.postDelayed(new Runnable() {
 
 			@Override
-			public void run() {
+			public void run() {//animation de victoire lancée après un certain délai
 				animateScoreAndTime(gameState.remainedSeconds, gameState.achievedScore);
 				animateStars(gameState.achievedStars);
 			}
@@ -92,6 +93,7 @@ public class PopupWonView extends RelativeLayout {
 	 * @param  start, un entier représentant le nombre d'étoiles obtenu lors de la partie
 	 */
 	private void animateStars(int start) {
+		//En fonction du nombre d'étoiles débloquées
 		switch (start) {
 		case 0:
 			mStar1.setVisibility(View.GONE);
@@ -111,6 +113,7 @@ public class PopupWonView extends RelativeLayout {
 			animateStar(mStar1, 0);
 			mStar2.setVisibility(View.VISIBLE);
 			mStar2.setAlpha(0f);
+			//Animation avec un peu de délai pour donner un style
 			animateStar(mStar2, 600);
 			break;
 		case 3:
@@ -165,7 +168,7 @@ public class PopupWonView extends RelativeLayout {
 		final int totalAnimation = 1200;
 
 		Clock.getInstance().startTimer(totalAnimation, 35, new OnTimerCount() {
-
+			//à la fin de l'horloge
 			@Override
 			public void onTick(long millisUntilFinished) {
 				float factor = millisUntilFinished / (totalAnimation * 1f); // 0.1
@@ -176,14 +179,12 @@ public class PopupWonView extends RelativeLayout {
 				mTime.setText(" " + String.format("%02d", min) + ":" + String.format("%02d", sec));
 				mScore.setText("" + scoreToShow);
 			}
-
+			//à la suppression de l'horloge
 			@Override
 			public void onFinish() {
 				mTime.setText(" " + String.format("%02d", 0) + ":" + String.format("%02d", 0));
 				mScore.setText("" + achievedScore);
 			}
 		});
-
 	}
-
 }

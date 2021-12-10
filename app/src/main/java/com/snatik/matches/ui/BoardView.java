@@ -28,16 +28,16 @@ import com.snatik.matches.model.BoardConfiguration;
 import com.snatik.matches.model.Game;
 import com.snatik.matches.utils.Utils;
 
-public class BoardView extends LinearLayout {
+public class BoardView extends LinearLayout {//Classe dédiée à la vue de la grille
 
-	private LinearLayout.LayoutParams mRowLayoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);
-	private LinearLayout.LayoutParams mTileLayoutParams;
-	private int mScreenWidth;
-	private int mScreenHeight;
-	private BoardConfiguration mBoardConfiguration;
-	private BoardArrangment mBoardArrangment;
-	private Map<Integer, TileView> mViewReference;
-	private List<Integer> flippedUp = new ArrayList<Integer>();
+	private LinearLayout.LayoutParams mRowLayoutParams = new LinearLayout.LayoutParams(LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT);//Layout pour gérer les lignes
+	private LinearLayout.LayoutParams mTileLayoutParams;//Layout pour gérer les tuiles
+	private int mScreenWidth;//Largeur de l'écran
+	private int mScreenHeight;//Hauteur de l'écran
+	private BoardConfiguration mBoardConfiguration;//Instance unique de configuration de la grille
+	private BoardArrangment mBoardArrangment;//Instance unique d'arrangement de la grille
+	private Map<Integer, TileView> mViewReference;//Liste des vues des tuiles
+	private List<Integer> flippedUp = new ArrayList<Integer>();//Liste des cartes retournées
 	private boolean mLocked = false;
 	private int mSize;
 
@@ -46,11 +46,13 @@ public class BoardView extends LinearLayout {
 	}
 
 	public BoardView(Context context, AttributeSet attributeSet) {
+		//Fixation de la vue de la grille
 		super(context, attributeSet);
 		setOrientation(LinearLayout.VERTICAL);
 		setGravity(Gravity.CENTER);
 		int margin = getResources().getDimensionPixelSize(R.dimen.margine_top);
 		int padding = getResources().getDimensionPixelSize(R.dimen.board_padding);
+		//Obtention des réglages de l'appareil
 		mScreenHeight = getResources().getDisplayMetrics().heightPixels - margin - padding*2;
 		mScreenWidth = getResources().getDisplayMetrics().widthPixels - padding*2 - Utils.px(20);
 		mViewReference = new HashMap<Integer, TileView>();
@@ -80,8 +82,8 @@ public class BoardView extends LinearLayout {
 		for (int row = 0; row < mBoardConfiguration.numRows; row++) {
 			sumMargin += singleMargin * 2;
 		}
-		int tilesHeight = (mScreenHeight - sumMargin) / mBoardConfiguration.numRows;
-		int tilesWidth = (mScreenWidth - sumMargin) / mBoardConfiguration.numTilesInRow;
+		int tilesHeight = (mScreenHeight - sumMargin) / mBoardConfiguration.numRows;//Hauteurs des tuiles
+		int tilesWidth = (mScreenWidth - sumMargin) / mBoardConfiguration.numTilesInRow;//Largeurs des tuiles
 		mSize = Math.min(tilesHeight, tilesWidth);
 
 		mTileLayoutParams = new LinearLayout.LayoutParams(mSize, mSize);
@@ -107,13 +109,12 @@ public class BoardView extends LinearLayout {
 	 * Permet de fixer le nombre de lignes de la grille
 	 */
 	private void addBoardRow(int rowNum) {
-
 		LinearLayout linearLayout = new LinearLayout(getContext());
 		linearLayout.setOrientation(LinearLayout.HORIZONTAL);
 		linearLayout.setGravity(Gravity.CENTER);
 
 		for (int tile = 0; tile < mBoardConfiguration.numTilesInRow; tile++) {
-			addTile(rowNum * mBoardConfiguration.numTilesInRow + tile, linearLayout);
+			addTile(rowNum * mBoardConfiguration.numTilesInRow + tile, linearLayout);//Ajout des tuiles
 		}
 
 		// add to this view
@@ -132,6 +133,7 @@ public class BoardView extends LinearLayout {
 		parent.setClipChildren(false);
 		mViewReference.put(id, tileView);
 
+		//ajout d'une tache asynchrone de chargement d'image des tuiles
 		new AsyncTask<Void, Void, Bitmap>() {
 
 			@Override
@@ -144,22 +146,24 @@ public class BoardView extends LinearLayout {
 				tileView.setTileImage(result);
 			}
 		}.execute();
-		
+
+		//Gestion du clic sur une des tuiles
 		tileView.setOnClickListener(new View.OnClickListener() {
 
 			@Override
 			public void onClick(View v) {
 				if (!mLocked && tileView.isFlippedDown()) {
-					tileView.flipUp();
+					tileView.flipUp();//retourner la tuile
 					flippedUp.add(id);
 					if (flippedUp.size() == 2) {
 						mLocked = true;
 					}
-					Shared.eventBus.notify(new FlipCardEvent(id));
+					Shared.eventBus.notify(new FlipCardEvent(id));//Lancement d'une notification
 				}
 			}
 		});
 
+		//Animations visuelles
 		ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(tileView, "scaleX", 0.8f, 1f);
 		scaleXAnimator.setInterpolator(new BounceInterpolator());
 		ObjectAnimator scaleYAnimator = ObjectAnimator.ofFloat(tileView, "scaleY", 0.8f, 1f);
@@ -186,6 +190,7 @@ public class BoardView extends LinearLayout {
 	 * @param id2, un entier correspondant à la position de la deuxième tuile
 	 */
 	public void hideCards(int id1, int id2) {
+		//animation de masquage de cartes
 		animateHide(mViewReference.get(id1));
 		animateHide(mViewReference.get(id2));
 		flippedUp.clear();
@@ -203,10 +208,9 @@ public class BoardView extends LinearLayout {
 				v.setLayerType(View.LAYER_TYPE_NONE, null);
 				v.setVisibility(View.INVISIBLE);
 			}
-		});
+		});//Listener d'animation
 		animator.setDuration(100);
 		v.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animator.start();
 	}
-
 }

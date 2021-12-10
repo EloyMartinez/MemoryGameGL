@@ -17,11 +17,11 @@ import android.widget.RelativeLayout;
 
 import com.snatik.matches.R;
 
-public class TileView extends FrameLayout {
+public class TileView extends FrameLayout {//Classe dédiée à la vue d'une tuile
 
-	private RelativeLayout mTopImage;
-	private ImageView mTileImage;
-	private boolean mFlippedDown = true;
+	private RelativeLayout mTopImage;//Layout de la tuile
+	private ImageView mTileImage;//image de la tuile
+	private boolean mFlippedDown = true;//la tuile est elle retournee?
 
 	public TileView(Context context) {
 		this(context, null);
@@ -81,14 +81,14 @@ public class TileView extends FrameLayout {
 		return mFlippedDown;
 	}
 
-	public class FlipAnimation extends Animation {
-		private Camera camera;
+	public class FlipAnimation extends Animation {//Classe interne dédiéeà l'animation de retournement de la tuile
+		private Camera camera;//Camera
 
-		private View fromView;
-		private View toView;
+		private View fromView;//vue initiale
+		private View toView;//vue finale
 
-		private float centerX;
-		private float centerY;
+		private float centerX;//position horizontale
+		private float centerY;//position verticale
 
 		private boolean forward = true;
 
