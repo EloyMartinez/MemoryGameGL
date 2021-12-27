@@ -6,7 +6,7 @@ import com.snatik.matches.events.EventObserver;
 /**
  * When the 'back to menu' was pressed.
  */
-public class StartEvent extends AbstractEvent {
+public class StartEvent extends AbstractEvent {//Classe dédiée à l'évènement de lancement d'évènement
 
 	public static final String TYPE = StartEvent.class.getName();
 

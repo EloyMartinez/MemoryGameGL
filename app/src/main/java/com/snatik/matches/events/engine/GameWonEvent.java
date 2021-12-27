@@ -7,7 +7,7 @@ import com.snatik.matches.model.GameState;
 /**
  * When the 'back to menu' was pressed.
  */
-public class GameWonEvent extends AbstractEvent {
+public class GameWonEvent extends AbstractEvent {//Classe dédiée à l'évènement de victoire du joueur
 
 	public static final String TYPE = GameWonEvent.class.getName();
 

@@ -5,16 +5,17 @@ import android.media.MediaPlayer.OnCompletionListener;
 
 import com.snatik.matches.R;
 
-public class Music {
+public class Music {//Classe destinée à gérer la musique du jeu
 
-	public static boolean OFF = false;
+	public static boolean OFF = false;//Etat du lecteur de musique (activé ou éteint)
 
 	/**
 	 * Lance la musique actuelle dans le jeu
 	 */
 	public static void playCurrent() {
 		if (!OFF) {
-			MediaPlayer mp = MediaPlayer.create(Shared.context, R.raw.correct_answer);
+			MediaPlayer mp = MediaPlayer.create(Shared.context, R.raw.correct_answer);//Accès au lecteur musical
+			// + initialisation de la musique pour une réponse correcte
 			mp.setOnCompletionListener(new OnCompletionListener() {
 				@Override
 				public void onCompletion(MediaPlayer mp) {
@@ -23,8 +24,8 @@ public class Music {
 					mp = null;
 				}
 
-			});
-			mp.start();
+			});//Vidage du cache du lecteur
+			mp.start();//Lancement du lecteur
 		}
 	}
 
@@ -32,8 +33,9 @@ public class Music {
 	 * Lance la musique d'animation pour le débloquage d'une nouvelle étoile
 	 */
 	public static void showStar() {
-		if (!OFF) {
-			MediaPlayer mp = MediaPlayer.create(Shared.context, R.raw.star);
+		if (!OFF) {//Vérification que le lecteur est activé
+			MediaPlayer mp = MediaPlayer.create(Shared.context, R.raw.star);//Accès au lecteur de musique
+			// + initialisation de la musique pour l'animation des étoiles
 			mp.setOnCompletionListener(new OnCompletionListener() {
 				@Override
 				public void onCompletion(MediaPlayer mp) {
@@ -42,8 +44,8 @@ public class Music {
 					mp = null;
 				}
 
-			});
-			mp.start();
+			});//Vidage du cache du lecteur
+			mp.start();//Lancement du lecteur
 		}
 	}
 }

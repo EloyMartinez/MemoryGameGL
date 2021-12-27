@@ -17,11 +17,11 @@ import android.widget.RelativeLayout;
 
 import com.snatik.matches.R;
 
-public class TileView extends FrameLayout {
+public class TileView extends FrameLayout {//Classe dédiée à la vue d'une tuile
 
-	private RelativeLayout mTopImage;
-	private ImageView mTileImage;
-	private boolean mFlippedDown = true;
+	private RelativeLayout mTopImage;//Layout de la tuile
+	private ImageView mTileImage;//image de la tuile
+	private boolean mFlippedDown = true;//la tuile est elle retournee?
 
 	public TileView(Context context) {
 		this(context, null);
@@ -41,21 +41,31 @@ public class TileView extends FrameLayout {
 		mTopImage = (RelativeLayout) findViewById(R.id.image_top);
 		mTileImage = (ImageView) findViewById(R.id.image);
 	}
-
+	/**
+	 * Permet d'initialiser l'image d'une tuile
+	 * @param bitmap, un bitmap correspondant à celui que l'on veut donner à la tuile
+	 */
 	public void setTileImage(Bitmap bitmap) {
 		mTileImage.setImageBitmap(bitmap);
 	}
 
+	/**
+	 * Permet de retourner face visible une tuile
+	 */
 	public void flipUp() {
 		mFlippedDown = false;
 		flip();
 	}
-
+	/**
+	 * Permet de retourner face cachée une tuile
+	 */
 	public void flipDown() {
 		mFlippedDown = true;
 		flip();
 	}
-	
+	/**
+	 * Permet de retourner une tuile de jeu
+	 */
 	private void flip() {
 		FlipAnimation flipAnimation = new FlipAnimation(mTopImage, mTileImage);
 		if (mTopImage.getVisibility() == View.GONE) {
@@ -63,19 +73,22 @@ public class TileView extends FrameLayout {
 		}
 		startAnimation(flipAnimation);
 	}
-
+	/**
+	 * Permet de savoir si une tuile est retournée face cachée
+	 * @return  un booleen représentant si la tuile est face cachée ou non
+	 */
 	public boolean isFlippedDown() {
 		return mFlippedDown;
 	}
 
-	public class FlipAnimation extends Animation {
-		private Camera camera;
+	public class FlipAnimation extends Animation {//Classe interne dédiéeà l'animation de retournement de la tuile
+		private Camera camera;//Camera
 
-		private View fromView;
-		private View toView;
+		private View fromView;//vue initiale
+		private View toView;//vue finale
 
-		private float centerX;
-		private float centerY;
+		private float centerX;//position horizontale
+		private float centerY;//position verticale
 
 		private boolean forward = true;
 
@@ -96,6 +109,9 @@ public class TileView extends FrameLayout {
 			setInterpolator(new AccelerateDecelerateInterpolator());
 		}
 
+		/**
+		 * Permet de gérer l'affichage de l'animation du retorunement d'une tuile
+		 */
 		public void reverse() {
 			forward = false;
 			View switchView = toView;

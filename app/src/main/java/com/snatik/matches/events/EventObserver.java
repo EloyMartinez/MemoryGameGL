@@ -12,7 +12,7 @@ import com.snatik.matches.events.ui.StartEvent;
 import com.snatik.matches.events.ui.ThemeSelectedEvent;
 
 
-public interface EventObserver {
+public interface EventObserver {//Interface dédiée au fonctionnement des observateurs d'évènements
 
 	void onEvent(FlipCardEvent event);
 

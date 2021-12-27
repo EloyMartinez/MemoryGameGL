@@ -1,7 +1,8 @@
 package com.snatik.matches.model;
 
-public class BoardConfiguration {
+public class BoardConfiguration {//Classe dédiée à la configuration de la grille
 
+	//Constantes correspondant aux nombre possible de tuiles
 	private static final int _6 = 6;
 	private static final int _12 = 12;
 	private static final int _18 = 18;
@@ -9,11 +10,11 @@ public class BoardConfiguration {
 	private static final int _32 = 32;
 	private static final int _50 = 50;
 
-	public final int difficulty;
-	public final int numTiles;
-	public final int numTilesInRow;
-	public final int numRows;
-	public final int time;
+	public final int difficulty;//Difficulté
+	public final int numTiles;//Nombre de tuiles
+	public final int numTilesInRow;//Nombre de tuiles par ligne
+	public final int numRows;//Nombre de lignes
+	public final int time;//Temps
 
 	public BoardConfiguration(int difficulty) {
 		this.difficulty = difficulty;
@@ -55,8 +56,7 @@ public class BoardConfiguration {
 			time = 210;
 			break;	
 		default:
-			throw new IllegalArgumentException("Select one of predefined sizes");
+			throw new IllegalArgumentException("Select one of predefined sizes");//Vérification qu'une taille correcte a été sélectionnée
 		}
 	}
-
 }

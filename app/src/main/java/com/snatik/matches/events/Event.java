@@ -7,8 +7,7 @@ package com.snatik.matches.events;
  * 
  * @author sromku
  */
-public interface Event {
+public interface Event {//Interface dédiée au fonctionnement des évènements
 
 	String getType();
-	
 }

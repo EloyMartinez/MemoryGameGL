@@ -7,10 +7,10 @@ import android.os.Message;
 import android.os.SystemClock;
 
 @SuppressLint("HandlerLeak")
-public abstract class CountDownClock {
+public abstract class CountDownClock {//Classe dédiée au fonctionnement de l'horloge
 
 	/**
-	 * Millis since boot when alarm should stop.
+	 * Millisecondes since boot when alarm should stop.
 	 */
 	private long mStopTimeInFuture;
 

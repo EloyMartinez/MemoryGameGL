@@ -6,7 +6,7 @@ import com.snatik.matches.events.EventObserver;
 /**
  * When the 'back to menu' was pressed.
  */
-public class NextGameEvent extends AbstractEvent {
+public class NextGameEvent extends AbstractEvent {//Classe dédiée à l'évènement de lancement de nouvelle partie
 
 	public static final String TYPE = NextGameEvent.class.getName();
 

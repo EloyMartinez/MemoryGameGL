@@ -23,8 +23,9 @@ import com.snatik.matches.events.ui.StartEvent;
 import com.snatik.matches.ui.PopupManager;
 import com.snatik.matches.utils.Utils;
 
-public class MenuFragment extends Fragment {
+public class MenuFragment extends Fragment {//Classe dédiée à la gestion du menu
 
+	//images du menu
 	private ImageView mTitle;
 	private ImageView mStartGameButton;
 	private ImageView mStartButtonLights;
@@ -34,6 +35,7 @@ public class MenuFragment extends Fragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		//réglages de la vue
 		View view = inflater.inflate(R.layout.menu_fragment, container, false);
 		mTitle = (ImageView) view.findViewById(R.id.title);
 		mStartGameButton = (ImageView) view.findViewById(R.id.start_game_button);
@@ -74,7 +76,10 @@ public class MenuFragment extends Fragment {
 
 		return view;
 	}
-
+	/**
+	 * Permet d'animer l'ensemble des composantes du menu
+	 * @param adapter, un adapteur permetant d'adapter la sortie du listener d'animation
+	 */
 	protected void animateAllAssetsOff(AnimatorListenerAdapter adapter) {
 		// title
 		// 120dp + 50dp + buffer(30dp)
@@ -110,7 +115,9 @@ public class MenuFragment extends Fragment {
 		animatorSet.addListener(adapter);
 		animatorSet.start();
 	}
-
+	/**
+	 * Permet de lancer une animation de tutoriel
+	 */
 	private void startTootipAnimation() {
 		ObjectAnimator scaleY = ObjectAnimator.ofFloat(mTooltip, "scaleY", 0.8f);
 		scaleY.setDuration(200);
@@ -130,7 +137,9 @@ public class MenuFragment extends Fragment {
 		mTooltip.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animatorSet.start();
 	}
-
+	/**
+	 * Permet de lancer une animation d'étoiles éclairées
+	 */
 	private void startLightsAnimation() {
 		ObjectAnimator animator = ObjectAnimator.ofFloat(mStartButtonLights, "rotation", 0f, 360f);
 		animator.setInterpolator(new AccelerateDecelerateInterpolator());

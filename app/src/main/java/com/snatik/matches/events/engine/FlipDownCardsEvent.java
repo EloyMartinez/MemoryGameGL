@@ -6,7 +6,7 @@ import com.snatik.matches.events.EventObserver;
 /**
  * When the 'back to menu' was pressed.
  */
-public class FlipDownCardsEvent extends AbstractEvent {
+public class FlipDownCardsEvent extends AbstractEvent {//Classe dédiée au retournement de toutes les cartes
 
 	public static final String TYPE = FlipDownCardsEvent.class.getName();
 

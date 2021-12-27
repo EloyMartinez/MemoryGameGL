@@ -6,11 +6,11 @@ import com.snatik.matches.events.EventObserver;
 /**
  * When the 'back to menu' was pressed.
  */
-public class FlipCardEvent extends AbstractEvent {
+public class FlipCardEvent extends AbstractEvent {//Classe dédiée à l'évènement de retournement d'une carte
 
 	public static final String TYPE = FlipCardEvent.class.getName();
 
-	public final int id;
+	public final int id;//Carte à retourner
 	
 	public FlipCardEvent(int id) {
 		this.id = id;

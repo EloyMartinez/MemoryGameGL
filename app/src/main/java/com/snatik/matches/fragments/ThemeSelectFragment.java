@@ -19,10 +19,11 @@ import com.snatik.matches.themes.Themes;
 
 import java.util.Locale;
 
-public class ThemeSelectFragment extends Fragment {
+public class ThemeSelectFragment extends Fragment {//Classe dédiée à la selection du thème
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+		//réglage des vues
 		View view = LayoutInflater.from(Shared.context).inflate(R.layout.theme_select_fragment, container, false);
 		View animals = view.findViewById(R.id.theme_animals_container);
 		View monsters = view.findViewById(R.id.theme_monsters_container);
@@ -38,35 +39,36 @@ public class ThemeSelectFragment extends Fragment {
 		animals.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Shared.eventBus.notify(new ThemeSelectedEvent(themeAnimals));
+				Shared.eventBus.notify(new ThemeSelectedEvent(themeAnimals));//lancement du thème
 			}
 		});
 
 		monsters.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Shared.eventBus.notify(new ThemeSelectedEvent(themeMonsters));
+				Shared.eventBus.notify(new ThemeSelectedEvent(themeMonsters));//lancement du thème
 			}
 		});
 
 		emoji.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
-				Shared.eventBus.notify(new ThemeSelectedEvent(themeEmoji));
+				Shared.eventBus.notify(new ThemeSelectedEvent(themeEmoji));//lancement du thème
 			}
 		});
-
-		/**
-		 * Imporove performance first!!!
-		 */
+		//Animations à lancer
 		animateShow(animals);
 		animateShow(monsters);
 		animateShow(emoji);
 
 		return view;
 	}
-
+	/**
+	 * Permet d'animer une vue
+	 * @param view, une vue correspondant à celle que l'on souhaite animer
+	 */
 	private void animateShow(View view) {
+		//réglage des animations
 		ObjectAnimator animatorScaleX = ObjectAnimator.ofFloat(view, "scaleX", 0.5f, 1f);
 		ObjectAnimator animatorScaleY = ObjectAnimator.ofFloat(view, "scaleY", 0.5f, 1f);
 		AnimatorSet animatorSet = new AnimatorSet();
@@ -76,10 +78,15 @@ public class ThemeSelectFragment extends Fragment {
 		view.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animatorSet.start();
 	}
-
+	/**
+	 * Permet de définir le nombre d'etoiles
+	 * @param theme, le thème actuel
+	 * @param imageView, une imageview représentant l'image pour laquelle on souhaite définir le nombre d'etoiles
+	 * @param type, un string représentant le format que l'on souhaite utiliser
+	 */
 	private void setStars(ImageView imageView, Theme theme, String type) {
 		int sum = 0;
-		for (int difficulty = 1; difficulty <= 6; difficulty++) {
+		for (int difficulty = 1; difficulty <= 6; difficulty++) {//affichage des meilleurs score par niveau
 			sum += Memory.getHighStars(theme.id, difficulty);
 		}
 		int num = sum / 6;

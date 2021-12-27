@@ -13,12 +13,12 @@ import com.snatik.matches.utils.Utils;
  * 
  * @author sromku
  */
-public class BoardArrangment {
+public class BoardArrangment {//Classe dédiée à l'arrangement de l'ordre de la grille
 
 	// like {0-2, 4-3, 1-5}
-	public Map<Integer, Integer> pairs;
+	public Map<Integer, Integer> pairs;//Liste des paires
 	// like {0-mosters_20, 1-mosters_12, 2-mosters_20, ...}
-	public Map<Integer, String> tileUrls;
+	public Map<Integer, String> tileUrls;//Liste des URLs des images
 
 	/**
 	 * Permet de retourner un bitmap pour une tuile choisie
@@ -27,11 +27,11 @@ public class BoardArrangment {
 	 * @return un bitmap correspondant à celui de la tuile
 	 */
 	public Bitmap getTileBitmap(int id, int size) {
-		String string = tileUrls.get(id);
+		String string = tileUrls.get(id);//Chargement de l'url
 		if (string.contains(Themes.URI_DRAWABLE)) {
 			String drawableResourceName = string.substring(Themes.URI_DRAWABLE.length());
 			int drawableResourceId = Shared.context.getResources().getIdentifier(drawableResourceName, "drawable", Shared.context.getPackageName());
-			Bitmap bitmap = Utils.scaleDown(drawableResourceId, size, size);
+			Bitmap bitmap = Utils.scaleDown(drawableResourceId, size, size);//Fixation des réglages de l'image
 			return Utils.crop(bitmap, size, size);
 		}
 		return null;
@@ -49,5 +49,4 @@ public class BoardArrangment {
 		}
 		return integer.equals(id2);
 	}
-
 }

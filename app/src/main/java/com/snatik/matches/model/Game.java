@@ -7,7 +7,7 @@ import com.snatik.matches.themes.Theme;
  * 
  * @author sromku
  */
-public class Game {
+public class Game {//Classe dédiée à la gestion d'une partie
 
 	/**
 	 * The board configuration
@@ -24,6 +24,5 @@ public class Game {
 	 */
 	public Theme theme;
 
-	public GameState gameState;
-
+	public GameState gameState;//état du jeu
 }
