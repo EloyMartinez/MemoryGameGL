@@ -25,7 +25,12 @@ public class DifficultyView extends LinearLayout {
 		setOrientation(LinearLayout.VERTICAL);
 		mTitle = (ImageView) findViewById(R.id.title);
 	}
-	
+
+	/**
+	 * Permet de régler la difficulté d'une partie
+	 * @param difficulty, un entier correspondant à la difficulté que l'on souhaite mettre en place
+	 * @param stars, un entier correspondant au nombre d'étoiles que l'on souhaite utiliser pour ce niveau
+	 */
 	public void setDifficulty(int difficulty, int stars) {
 		String titleResource = String.format(Locale.US, "button_difficulty_%d_star_%d", difficulty, stars);
 		int drawableResourceId = Shared.context.getResources().getIdentifier(titleResource, "drawable", Shared.context.getPackageName());

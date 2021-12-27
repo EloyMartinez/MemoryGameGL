@@ -30,7 +30,7 @@ public class ThemeSelectFragment extends Fragment {
 
 		final Theme themeAnimals = Themes.createAnimalsTheme();
 		setStars((ImageView) animals.findViewById(R.id.theme_animals), themeAnimals, "animals");
-		final Theme themeMonsters = Themes.createMosterTheme();
+		final Theme themeMonsters = Themes.createMonsterTheme();
 		setStars((ImageView) monsters.findViewById(R.id.theme_monsters), themeMonsters, "monsters");
 		final Theme themeEmoji = Themes.createEmojiTheme();
 		setStars((ImageView) emoji.findViewById(R.id.theme_emoji), themeEmoji, "emoji");

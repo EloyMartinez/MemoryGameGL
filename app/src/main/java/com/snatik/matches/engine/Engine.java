@@ -62,6 +62,9 @@ public class Engine extends EventObserverAdapter {
 		return mInstance;
 	}
 
+	/**
+	 * Permet de lancer le moteur qui va gérer le déroulement d'une partie
+	 */
 	public void start() {
 		Shared.eventBus.listen(DifficultySelectedEvent.TYPE, this);
 		Shared.eventBus.listen(FlipCardEvent.TYPE, this);
@@ -71,7 +74,9 @@ public class Engine extends EventObserverAdapter {
 		Shared.eventBus.listen(NextGameEvent.TYPE, this);
 		Shared.eventBus.listen(ResetBackgroundEvent.TYPE, this);
 	}
-
+	/**
+	 * Permet d'arrêter le moteur qui va gérer le déroulement d'une partie
+	 */
 	public void stop() {
 		mPlayingGame = null;
 		mBackgroundImage.setImageDrawable(null);
@@ -175,7 +180,9 @@ public class Engine extends EventObserverAdapter {
 		// start the screen
 		mScreenController.openScreen(Screen.GAME);
 	}
-
+	/**
+	 * Permet d'arranger la grille de tuiles
+	 */
 	private void arrangeBoard() {
 		BoardConfiguration boardConfiguration = mPlayingGame.boardConfiguration;
 		BoardArrangment boardArrangment = new BoardArrangment();
@@ -275,15 +282,27 @@ public class Engine extends EventObserverAdapter {
 			// Log.i("my_tag", "Flip: mFlippedId: " + mFlippedId);
 		}
 	}
-
+	/**
+	 * Permet de retourner la partie actuelle
+	 * @return un jeu représentant la partie actuelle
+	 */
 	public Game getActiveGame() {
 		return mPlayingGame;
 	}
 
+	/**
+	 * Permet de retourner le thème sélectionné
+	 * @return un thème correspondant au thème sélectionné
+	 */
 	public Theme getSelectedTheme() {
 		return mSelectedTheme;
 	}
 
+	/**
+	 * Permet d'afficher une image de fond
+	 * @param backgroundImage, une vue d'image correspondant à l'image de fond que
+	 *                            l'on souhaite afficher
+	 */
 	public void setBackgroundImageView(ImageView backgroundImage) {
 		mBackgroundImage = backgroundImage;
 	}

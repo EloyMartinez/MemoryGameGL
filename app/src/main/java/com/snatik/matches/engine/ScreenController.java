@@ -3,9 +3,9 @@ package com.snatik.matches.engine;
 import java.util.ArrayList;
 import java.util.List;
 
-import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentTransaction;
+import android.app.Fragment;
+import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 
 import com.snatik.matches.R;
 import com.snatik.matches.common.Shared;
@@ -51,7 +51,7 @@ public class ScreenController {
 	 */
 	public void openScreen(Screen screen) {
 		mFragmentManager = Shared.activity.getSupportFragmentManager();
-		
+
 		if (screen == Screen.GAME && openedScreens.get(openedScreens.size() - 1) == Screen.GAME) {
 			openedScreens.remove(openedScreens.size() - 1);
 		} else if (screen == Screen.DIFFICULTY && openedScreens.get(openedScreens.size() - 1) == Screen.GAME) {
@@ -77,7 +77,7 @@ public class ScreenController {
 			Screen screen = openedScreens.get(openedScreens.size() - 1);
 			openedScreens.remove(openedScreens.size() - 1);
 			openScreen(screen);
-			if ((screen == Screen.THEME_SELECT || screen == Screen.MENU) && 
+			if ((screen == Screen.THEME_SELECT || screen == Screen.MENU) &&
 					(screenToRemove == Screen.DIFFICULTY || screenToRemove == Screen.GAME)) {
 				Shared.eventBus.notify(new ResetBackgroundEvent());
 			}
@@ -93,16 +93,16 @@ public class ScreenController {
 	 */
 	private Fragment getFragment(Screen screen) {
 		switch (screen) {
-		case MENU:
-			return new MenuFragment();
-		case DIFFICULTY:
-			return new DifficultySelectFragment();
-		case GAME:
-			return new GameFragment();
-		case THEME_SELECT:
-			return new ThemeSelectFragment();
-		default:
-			break;
+			case MENU:
+				return new MenuFragment();
+			case DIFFICULTY:
+				return new DifficultySelectFragment();
+			case GAME:
+				return new GameFragment();
+			case THEME_SELECT:
+				return new ThemeSelectFragment();
+			default:
+				break;
 		}
 		return null;
 	}

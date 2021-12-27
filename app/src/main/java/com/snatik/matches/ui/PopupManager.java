@@ -17,7 +17,10 @@ import com.snatik.matches.common.Shared;
 import com.snatik.matches.model.GameState;
 
 public class PopupManager {
-	
+
+	/**
+	 * Permet d'afficher le pop up lié aux réglages de la partie
+	 */
 	public static void showPopupSettings() {
 		RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		popupContainer.removeAllViews();
@@ -47,7 +50,9 @@ public class PopupManager {
 		animatorSet.setInterpolator(new DecelerateInterpolator(2));
 		animatorSet.start();
 	}
-
+	/**
+	 * Permet d'afficher le pop up de réussite d'un niveau
+	 */
 	public static void showPopupWon(GameState gameState) {
 		RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		popupContainer.removeAllViews();
@@ -71,7 +76,9 @@ public class PopupManager {
 		popupWonView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animatorSet.start();
 	}
-
+	/**
+	 * Permet de fermer un pop up affiché à l'écran
+	 */
 	public static void closePopup() {
 		final RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		int childCount = popupContainer.getChildCount();
@@ -105,7 +112,10 @@ public class PopupManager {
 			animatorSet.start();
 		}
 	}
-
+	/**
+	 * Permet d'indiquer si un pop up est ou non affiché
+	 * @return  un booleen représentant si un pop up est affiché ou non
+	 */
 	public static boolean isShown() {
 		RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		return popupContainer.getChildCount() > 0;

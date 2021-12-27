@@ -65,7 +65,10 @@ public class BoardView extends LinearLayout {
 	public static BoardView fromXml(Context context, ViewGroup parent) {
 		return (BoardView) LayoutInflater.from(context).inflate(R.layout.board_view, parent, false);
 	}
-
+	/**
+	 * Permet d'initaliser la grille de tuiles en fonction de la partie
+	 * @param game, un jeu correspondant à la partie actuelle
+	 */
 	public void setBoard(Game game) {
 		mBoardConfiguration = game.boardConfiguration;
 		mBoardArrangment = game.boardArrangment;
@@ -89,7 +92,7 @@ public class BoardView extends LinearLayout {
 	}
 
 	/**
-	 * Build the board
+	 * Permet de construire la grille de jeu de la partie
 	 */
 	private void buildBoard() {
 
@@ -100,7 +103,9 @@ public class BoardView extends LinearLayout {
 
 		setClipChildren(false);
 	}
-
+	/**
+	 * Permet de fixer le nombre de lignes de la grille
+	 */
 	private void addBoardRow(int rowNum) {
 
 		LinearLayout linearLayout = new LinearLayout(getContext());
@@ -115,7 +120,11 @@ public class BoardView extends LinearLayout {
 		addView(linearLayout, mRowLayoutParams);
 		linearLayout.setClipChildren(false);
 	}
-
+	/**
+	 * Permet d'ajouter une tuile à la grille
+	 * @param id, un entier correspondant à la position de la tuile
+	 * @param parent, un groupe de vue représentatif de la grille
+	 */
 	private void addTile(final int id, ViewGroup parent) {
 		final TileView tileView = TileView.fromXml(getContext(), parent);
 		tileView.setLayoutParams(mTileLayoutParams);
@@ -161,7 +170,9 @@ public class BoardView extends LinearLayout {
 		tileView.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animatorSet.start();
 	}
-
+	/**
+	 * Permet de rabattre toutes les tuiles de la grille
+	 */
 	public void flipDownAll() {
 		for (Integer id : flippedUp) {
 			mViewReference.get(id).flipDown();
@@ -169,14 +180,21 @@ public class BoardView extends LinearLayout {
 		flippedUp.clear();
 		mLocked = false;
 	}
-
+	/**
+	 * Permet de retourner en face cachée deux cartes lorsqu'elles ne sont pas paires
+	 * @param id1, un entier correspondant à la position de la première tuile
+	 * @param id2, un entier correspondant à la position de la deuxième tuile
+	 */
 	public void hideCards(int id1, int id2) {
 		animateHide(mViewReference.get(id1));
 		animateHide(mViewReference.get(id2));
 		flippedUp.clear();
 		mLocked = false;
 	}
-
+	/**
+	 * Permet de générer une animation de rotation de cartes lorsque l'on souhaite la cacher
+	 * @param v, une vue de tuile, correspondant à la tuile que l'on veut retourner
+	 */
 	protected void animateHide(final TileView v) {
 		ObjectAnimator animator = ObjectAnimator.ofFloat(v, "alpha", 0f);
 		animator.addListener(new AnimatorListenerAdapter() {
