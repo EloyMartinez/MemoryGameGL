@@ -36,14 +36,8 @@ public class PopupSettingsView extends LinearLayout {//Classe dédiée à la vue
 		FontLoader.setTypeface(context, new TextView[] { mSoundText, rateView }, Font.GROBOLD);
 		mSoundImage = (ImageView) findViewById(R.id.sound_image);
 		View soundOff = findViewById(R.id.sound_off);
-		soundOff.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Music.OFF = !Music.OFF;
-				setMusicButton();
-			}
-		});
-		View rate = findViewById(R.id.rate);//Notation de l'application
+		soundOff.setOnClickListener(click());
+		View rate = findViewById(R.id.rate);
 		rate.setOnClickListener(new View.OnClickListener() {
 			@Override
 			public void onClick(View v) {
@@ -70,5 +64,15 @@ public class PopupSettingsView extends LinearLayout {//Classe dédiée à la vue
 			mSoundText.setText("Sound ON");
 			mSoundImage.setImageResource(R.drawable.button_music_on);
 		}
+	}
+
+	private View.OnClickListener click(){
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Music.OFF = !Music.OFF;
+				setMusicButton();
+			}
+		};
 	}
 }

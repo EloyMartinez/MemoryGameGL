@@ -95,41 +95,58 @@ public class PopupWonView extends RelativeLayout {//Classe dédiée à la gestio
 	private void animateStars(int start) {
 		//En fonction du nombre d'étoiles débloquées
 		switch (start) {
-		case 0:
-			mStar1.setVisibility(View.GONE);
-			mStar2.setVisibility(View.GONE);
-			mStar3.setVisibility(View.GONE);
-			break;
-		case 1:
-			mStar2.setVisibility(View.GONE);
-			mStar3.setVisibility(View.GONE);
-			mStar1.setAlpha(0f);
-			animateStar(mStar1, 0);
-			break;
-		case 2:
-			mStar3.setVisibility(View.GONE);
-			mStar1.setVisibility(View.VISIBLE);
-			mStar1.setAlpha(0f);
-			animateStar(mStar1, 0);
-			mStar2.setVisibility(View.VISIBLE);
-			mStar2.setAlpha(0f);
-			//Animation avec un peu de délai pour donner un style
-			animateStar(mStar2, 600);
-			break;
-		case 3:
-			mStar1.setVisibility(View.VISIBLE);
-			mStar1.setAlpha(0f);
-			animateStar(mStar1, 0);
-			mStar2.setVisibility(View.VISIBLE);
-			mStar2.setAlpha(0f);
-			animateStar(mStar2, 600);
-			mStar3.setVisibility(View.VISIBLE);
-			mStar3.setAlpha(0f);
-			animateStar(mStar3, 1200);
-			break;
-		default:
-			break;
+			case 0:
+				choice0();
+				break;
+			case 1:
+				choice1();
+				break;
+			case 2:
+				choice2();
+				break;
+			case 3:
+				choice3();
+				break;
+			default:
+				break;
 		}
+	}
+
+
+	private void choice0(){
+		mStar1.setVisibility(View.GONE);
+		mStar2.setVisibility(View.GONE);
+		mStar3.setVisibility(View.GONE);
+	}
+
+	private void choice1(){
+		mStar2.setVisibility(View.GONE);
+		mStar3.setVisibility(View.GONE);
+		mStar1.setAlpha(0f);
+		animateStar(mStar1, 0);
+	}
+
+	private void choice2(){
+		mStar3.setVisibility(View.GONE);
+		mStar1.setVisibility(View.VISIBLE);
+		mStar1.setAlpha(0f);
+		animateStar(mStar1, 0);
+		mStar2.setVisibility(View.VISIBLE);
+		mStar2.setAlpha(0f);
+		//Animation avec un peu de délai pour donner un style
+		animateStar(mStar2, 600);
+	}
+
+	private void choice3(){
+		mStar1.setVisibility(View.VISIBLE);
+		mStar1.setAlpha(0f);
+		animateStar(mStar1, 0);
+		mStar2.setVisibility(View.VISIBLE);
+		mStar2.setAlpha(0f);
+		animateStar(mStar2, 600);
+		mStar3.setVisibility(View.VISIBLE);
+		mStar3.setAlpha(0f);
+		animateStar(mStar3, 1200);
 	}
 
 	/**

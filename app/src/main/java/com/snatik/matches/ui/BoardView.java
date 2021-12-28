@@ -132,36 +132,9 @@ public class BoardView extends LinearLayout {//Classe dédiée à la vue de la g
 		parent.addView(tileView);
 		parent.setClipChildren(false);
 		mViewReference.put(id, tileView);
-
-		//ajout d'une tache asynchrone de chargement d'image des tuiles
-		new AsyncTask<Void, Void, Bitmap>() {
-
-			@Override
-			protected Bitmap doInBackground(Void... params) {
-				return mBoardArrangment.getTileBitmap(id, mSize);
-			}
-			
-			@Override
-			protected void onPostExecute(Bitmap result) {
-				tileView.setTileImage(result);
-			}
-		}.execute();
-
+		asyncTask(id, tileView);
 		//Gestion du clic sur une des tuiles
-		tileView.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-				if (!mLocked && tileView.isFlippedDown()) {
-					tileView.flipUp();//retourner la tuile
-					flippedUp.add(id);
-					if (flippedUp.size() == 2) {
-						mLocked = true;
-					}
-					Shared.eventBus.notify(new FlipCardEvent(id));//Lancement d'une notification
-				}
-			}
-		});
+		tileView.setOnClickListener(OnCliclListenerTileView(id, tileView));
 
 		//Animations visuelles
 		ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(tileView, "scaleX", 0.8f, 1f);
@@ -212,5 +185,36 @@ public class BoardView extends LinearLayout {//Classe dédiée à la vue de la g
 		animator.setDuration(100);
 		v.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animator.start();
+	}
+
+	private AsyncTask<Void, Void, Bitmap> asyncTask(final int id, final TileView tileView){
+		return new AsyncTask<Void, Void, Bitmap>() {
+
+			@Override
+			protected Bitmap doInBackground(Void... params) {
+				return mBoardArrangment.getTileBitmap(id, mSize);
+			}
+
+			@Override
+			protected void onPostExecute(Bitmap result) {
+				tileView.setTileImage(result);
+			}
+		}.execute();
+	}
+
+	private View.OnClickListener OnCliclListenerTileView(final int id, final TileView tileView){
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (!mLocked && tileView.isFlippedDown()) {
+					tileView.flipUp();
+					flippedUp.add(id);
+					if (flippedUp.size() == 2) {
+						mLocked = true;
+					}
+					Shared.eventBus.notify(new FlipCardEvent(id));
+				}
+			}
+		};
 	}
 }

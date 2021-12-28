@@ -35,34 +35,24 @@ public class ThemeSelectFragment extends Fragment {//Classe dédiée à la selec
 		setStars((ImageView) monsters.findViewById(R.id.theme_monsters), themeMonsters, "monsters");
 		final Theme themeEmoji = Themes.createEmojiTheme();
 		setStars((ImageView) emoji.findViewById(R.id.theme_emoji), themeEmoji, "emoji");
-
-		animals.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Shared.eventBus.notify(new ThemeSelectedEvent(themeAnimals));//lancement du thème
-			}
-		});
-
-		monsters.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Shared.eventBus.notify(new ThemeSelectedEvent(themeMonsters));//lancement du thème
-			}
-		});
-
-		emoji.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Shared.eventBus.notify(new ThemeSelectedEvent(themeEmoji));//lancement du thème
-			}
-		});
-		//Animations à lancer
+		themeOnClickListener(animals, themeAnimals);
+		themeOnClickListener(monsters, themeMonsters);
+		themeOnClickListener(emoji, themeEmoji);
 		animateShow(animals);
 		animateShow(monsters);
 		animateShow(emoji);
-
 		return view;
 	}
+
+	private void themeOnClickListener(View view, final Theme theme){
+		view.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Shared.eventBus.notify(new ThemeSelectedEvent(theme));
+			}
+		});
+	}
+
 	/**
 	 * Permet d'animer une vue
 	 * @param view, une vue correspondant à celle que l'on souhaite animer

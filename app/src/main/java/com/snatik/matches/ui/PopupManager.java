@@ -85,12 +85,7 @@ public class PopupManager {//Classe dédée à la gestion des popups
 		if (childCount > 0) {
 			View background = null;
 			View viewPopup = null;
-			if (childCount == 1) {
-				viewPopup = popupContainer.getChildAt(0);
-			} else {
-				background = popupContainer.getChildAt(0);
-				viewPopup = popupContainer.getChildAt(1);
-			}
+			checkChildCount(childCount, viewPopup, background, popupContainer);
 
 			AnimatorSet animatorSet = new AnimatorSet();
 			ObjectAnimator scaleXAnimator = ObjectAnimator.ofFloat(viewPopup, "scaleX", 0f);
@@ -112,6 +107,7 @@ public class PopupManager {//Classe dédée à la gestion des popups
 			animatorSet.start();
 		}
 	}
+
 	/**
 	 * Permet d'indiquer si un pop up est ou non affiché
 	 * @return  un booleen représentant si un pop up est affiché ou non
@@ -120,4 +116,15 @@ public class PopupManager {//Classe dédée à la gestion des popups
 		RelativeLayout popupContainer = (RelativeLayout) Shared.activity.findViewById(R.id.popup_container);
 		return popupContainer.getChildCount() > 0;
 	}
+
+
+	private static void checkChildCount(int childCount, View viewPopup, View background, RelativeLayout popupContainer){
+		if (childCount == 1) {
+			viewPopup = popupContainer.getChildAt(0);
+		} else {
+			background = popupContainer.getChildAt(0);
+			viewPopup = popupContainer.getChildAt(1);
+		}
+	}
+
 }

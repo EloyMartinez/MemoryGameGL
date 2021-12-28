@@ -195,17 +195,11 @@ public class Engine extends EventObserverAdapter {//Classe destinée à gérer l
 		BoardConfiguration boardConfiguration = mPlayingGame.boardConfiguration;
 		BoardArrangment boardArrangment = new BoardArrangment();
 
-		// build pairs
-		// result {0,1,2,...n} // n-number of tiles
 		List<Integer> ids = new ArrayList<Integer>();
 		for (int i = 0; i < boardConfiguration.numTiles; i++) {
 			ids.add(i);
 		}
-		// shuffle
-		// result {4,10,2,39,...}
 		Collections.shuffle(ids);
-
-		// place the board
 		List<String> tileImageUrls = mPlayingGame.theme.tileImageUrls;
 		Collections.shuffle(tileImageUrls);
 		boardArrangment.pairs = new HashMap<Integer, Integer>();
@@ -213,41 +207,29 @@ public class Engine extends EventObserverAdapter {//Classe destinée à gérer l
 		int j = 0;
 		for (int i = 0; i < ids.size(); i++) {
 			if (i + 1 < ids.size()) {
-				// {4,10}, {2,39}, ...
 				boardArrangment.pairs.put(ids.get(i), ids.get(i + 1));
-				// {10,4}, {39,2}, ...
 				boardArrangment.pairs.put(ids.get(i + 1), ids.get(i));
-				// {4,
 				boardArrangment.tileUrls.put(ids.get(i), tileImageUrls.get(j));
 				boardArrangment.tileUrls.put(ids.get(i + 1), tileImageUrls.get(j));
 				i++;
 				j++;
 			}
 		}
-
 		mPlayingGame.boardArrangment = boardArrangment;
 	}
+
+
 	//En cas d'évènement de retournement de carte
 	@Override
 	public void onEvent(FlipCardEvent event) {
-		// Log.i("my_tag", "Flip: " + event.id);
 		int id = event.id;
 		if (mFlippedId == -1) {
 			mFlippedId = id;
-			// Log.i("my_tag", "Flip: mFlippedId: " + event.id);
 		} else {
 			if (mPlayingGame.boardArrangment.isPair(mFlippedId, id)) {
-				// Log.i("my_tag", "Flip: is pair: " + mFlippedId + ", " + id);
-				// send event - hide id1, id2
 				Shared.eventBus.notify(new HidePairCardsEvent(mFlippedId, id), 1000);
 				// play music
-				mHandler.postDelayed(new Runnable() {
-
-					@Override
-					public void run() {
-						Music.playCurrent();
-					}
-				}, 1000);
+				playMusic();
 				mToFlip -= 2;
 				if (mToFlip == 0) {
 					int passedSeconds = (int) (Clock.getInstance().getPassedTime() / 1000);
@@ -258,38 +240,53 @@ public class Engine extends EventObserverAdapter {//Classe destinée à gérer l
 					// remained seconds
 					gameState.remainedSeconds = totalTime - passedSeconds;
 					gameState.passedSeconds = passedSeconds;
-
 					// calc stars
-					if (passedSeconds <= totalTime / 2) {
-						gameState.achievedStars = 3;
-					} else if (passedSeconds <= totalTime - totalTime / 5) {
-						gameState.achievedStars = 2;
-					} else if (passedSeconds < totalTime) {
-						gameState.achievedStars = 1;
-					} else {
-						gameState.achievedStars = 0;
-					}
-
+					calcStar(passedSeconds, totalTime, gameState);
 					// calc score
 					gameState.achievedScore = mPlayingGame.boardConfiguration.difficulty * gameState.remainedSeconds * mPlayingGame.theme.id;
-
 					// save to memory
 					Memory.save(mPlayingGame.theme.id, mPlayingGame.boardConfiguration.difficulty, gameState.achievedStars);
 					Memory.saveTime(mPlayingGame.theme.id, mPlayingGame.boardConfiguration.difficulty ,gameState.passedSeconds);
-
-
-
 					Shared.eventBus.notify(new GameWonEvent(gameState), 1200);
 				}
 			} else {
-				// Log.i("my_tag", "Flip: all down");
-				// send event - flip all down
 				Shared.eventBus.notify(new FlipDownCardsEvent(), 1000);
 			}
 			mFlippedId = -1;
-			// Log.i("my_tag", "Flip: mFlippedId: " + mFlippedId);
 		}
 	}
+
+	/**
+	 * Permet de jouer de la musique
+	 */
+	public void playMusic(){
+		mHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				Music.playCurrent();
+			}
+		}, 1000);
+	}
+
+	/**
+	 * Permet de calculer les étoiles
+	 * @param passedSeconds : temps passé a réalisé le niveau
+	 * @param totalTime : Temps total pour réaliser le niveau
+	 * @param gameState état du jeu
+	 */
+	public void calcStar(int passedSeconds, int totalTime, GameState gameState){
+		if (passedSeconds <= totalTime / 2) {
+			gameState.achievedStars = 3;
+		} else if (passedSeconds <= totalTime - totalTime / 5) {
+			gameState.achievedStars = 2;
+		} else if (passedSeconds < totalTime) {
+			gameState.achievedStars = 1;
+		} else {
+			gameState.achievedStars = 0;
+		}
+	}
+
+
 	/**
 	 * Permet de retourner la partie actuelle
 	 * @return un jeu représentant la partie actuelle

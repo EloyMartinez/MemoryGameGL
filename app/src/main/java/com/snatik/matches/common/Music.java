@@ -29,6 +29,10 @@ public class Music {//Classe destinée à gérer la musique du jeu
 		}
 	}
 
+	public static void playBackgroundMusic() {
+		// TODO
+	}
+
 	/**
 	 * Lance la musique d'animation pour le débloquage d'une nouvelle étoile
 	 */

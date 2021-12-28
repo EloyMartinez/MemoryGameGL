@@ -48,34 +48,18 @@ public class MenuFragment extends Fragment {//Classe dédiée à la gestion du m
 			}
 		});
 		mGooglePlayGameButton = (ImageView) view.findViewById(R.id.google_play_button);
-		mGooglePlayGameButton.setOnClickListener(new View.OnClickListener() {
-			@Override
-			public void onClick(View v) {
-				Toast.makeText(getActivity(), "Leaderboards will be available in the next game updates", Toast.LENGTH_LONG).show();
-			}
-		});
+		mGooglePlayGameButton.setOnClickListener(onClickListenerLeaderboards());
 		mStartButtonLights = (ImageView) view.findViewById(R.id.start_game_button_lights);
 		mTooltip = (ImageView) view.findViewById(R.id.tooltip);
-		mStartGameButton.setOnClickListener(new View.OnClickListener() {
-
-			@Override
-			public void onClick(View v) {
-
-				// animate title from place and navigation buttons from place
-				animateAllAssetsOff(new AnimatorListenerAdapter() {
-					@Override
-					public void onAnimationEnd(Animator animation) {
-						Shared.eventBus.notify(new StartEvent());
-					}
-				});
-			}
-		});
-
+		mStartGameButton.setOnClickListener(onClickListeneStartGameButton());
 		startLightsAnimation();
 		startTootipAnimation();
 
+		// play background music
+		Music.playBackgroundMusic();
 		return view;
 	}
+
 	/**
 	 * Permet d'animer l'ensemble des composantes du menu
 	 * @param adapter, un adapteur permetant d'adapter la sortie du listener d'animation
@@ -147,6 +131,30 @@ public class MenuFragment extends Fragment {//Classe dédiée à la gestion du m
 		animator.setRepeatCount(ValueAnimator.INFINITE);
 		mStartButtonLights.setLayerType(View.LAYER_TYPE_HARDWARE, null);
 		animator.start();
+	}
+
+	private View.OnClickListener onClickListenerLeaderboards(){
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				Toast.makeText(getActivity(), "Leaderboards will be available in the next game updates", Toast.LENGTH_LONG).show();
+			}
+		};
+	}
+
+	private View.OnClickListener onClickListeneStartGameButton() {
+		return new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				// animate title from place and navigation buttons from place
+				animateAllAssetsOff(new AnimatorListenerAdapter() {
+					@Override
+					public void onAnimationEnd(Animator animation) {
+						Shared.eventBus.notify(new StartEvent());
+					}
+				});
+			}
+		};
 	}
 
 }
